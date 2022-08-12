@@ -1,11 +1,18 @@
 #!/bin/bash
 
-ENCODE=../fairseq/scripts/spm_encode.py
-MODEL=../pretrained_models/flores101_mm100_615M/sentencepiece.bpe.model
-DEV_PATH=../data/flores101_dataset/dev
-DEVTEST_PATH=../data/flores101_dataset/devtest
-SAVE_DIR=../data/small_task2_bin  # TODO: change to the directory for small task #1
-DICT=../pretrained_models/flores101_mm100_615M/dict.txt
+HOME=/mnt/home
+
+cd $HOME/fairseq-emecom
+source scripts/variables.sh
+
+cd $HOME/multiback
+
+ENCODE=$HOME/fairseq/scripts/spm_encode.py
+MODEL=$DATA_ROOT/flores101_mm100_615M/sentencepiece.bpe.model
+DEV_PATH=$DATA_ROOT/flores101_dataset/dev
+DEVTEST_PATH=$DATA_ROOT/flores101_dataset/devtest
+SAVE_DIR=$DATA_ROOT/smalltask2.bin  # TODO: change to the directory for small task #1
+DICT=$DATA_ROOT/flores101_mm100_615M/dict.txt
 
 mkdir $SAVE_DIR
 

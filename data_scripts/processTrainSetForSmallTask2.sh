@@ -1,10 +1,16 @@
 #!/bin/bash
+HOME=/mnt/home
 
-ENCODE=../fairseq/scripts/spm_encode.py
-MODEL=../pretrained_models/flores101_mm100_615M/sentencepiece.bpe.model
-DATA_PATH=../data/small_task2_filt_concat  # TODO: change to the raw data directory for small task #1
-SAVE_DIR=../data/small_task2_bin  # TODO: change to the directory where you want to save for small task #1
-DICT=../pretrained_models/flores101_mm100_615M/dict.txt
+cd $HOME/fairseq-emecom
+source scripts/variables.sh
+
+cd $HOME/multiback
+
+ENCODE=$HOME/fairseq/scripts/spm_encode.py
+MODEL=$DATA_ROOT/flores101_mm100_615M/sentencepiece.bpe.model
+DATA_PATH=$DATA_ROOT/small_task2_filt_concat  # TODO: change to the raw data directory for small task #1
+SAVE_DIR=../data/smalltask2.bin  # TODO: change to the directory where you want to save for small task #1
+DICT=$DATA_ROOT/flores101_mm100_615M/dict.txt
 
 LANGS=(  # TODO: change to the languages of small task #1
     "en"

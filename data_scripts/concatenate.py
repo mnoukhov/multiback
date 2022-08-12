@@ -1,8 +1,15 @@
+import argparse
 import os
 
 if __name__ == "__main__":
-    data_dir = "../data/small_task2_filt"  # TODO: change to the directory where you save raw data for small task #1
-    save_dir = "../data/small_task2_filt_concat" # TODO: change to the directory where you want to save for small task #1
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--data-root", help="parent dir of small_task2_filt")
+    args = parser.parse_args()
+
+    data_dir = f"{args.data_root}/small_task2_filt"  # TODO: change to the directory where you save raw data for small task #1
+    save_dir = f"{args.data_root}/small_task2_filt_concat"  # TODO: change to the directory where you want to save for small task #1
+
+    os.makedirs(save_dir, exist_ok=True)
 
     prefix = []
     lang_pairs = []
@@ -28,9 +35,13 @@ if __name__ == "__main__":
                 tgt = fp.read()
 
         # Save
-        with open(os.path.join(save_dir, "train." + key + "." + key.split("-")[0]), 'a') as fp:
+        with open(
+            os.path.join(save_dir, "train." + key + "." + key.split("-")[0]), "a"
+        ) as fp:
             fp.write(src + "\n")
-        with open(os.path.join(save_dir, "train." + key + "." + key.split("-")[1]), 'a') as fp:
+        with open(
+            os.path.join(save_dir, "train." + key + "." + key.split("-")[1]), "a"
+        ) as fp:
             fp.write(tgt + "\n")
 
     data_dict = {}
@@ -51,14 +62,16 @@ if __name__ == "__main__":
             with open(tgt_file + ".filt") as fp:
                 tgt = fp.read()
         data_dict[key][0] += src
-        data_dict[key][0] += '\n'
+        data_dict[key][0] += "\n"
         data_dict[key][1] += tgt
-        data_dict[key][1] += '\n'
+        data_dict[key][1] += "\n"
 
     for k, v in data_dict.items():
-        with open(os.path.join(save_dir, "train." + k + "." + k.split("-")[0]), 'w') as fp:
+        with open(
+            os.path.join(save_dir, "train." + k + "." + k.split("-")[0]), "w"
+        ) as fp:
             fp.write(v[0])
-        with open(os.path.join(save_dir, "train." + k + "." + k.split("-")[1]), 'w') as fp:
+        with open(
+            os.path.join(save_dir, "train." + k + "." + k.split("-")[1]), "w"
+        ) as fp:
             fp.write(v[1])
-
-
